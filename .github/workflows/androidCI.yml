@@ -9,3 +9,9 @@ jobs:
     steps:
     - name: Run Echo Command
       run: echo "Hello, GitHub Actions!"
+      
+    - name: Checkout code
+      uses: actions/checkout@v2
+      
+    - name: Gradle version
+      run: ./gradlew -v 

@@ -15,3 +15,5 @@ jobs:
       
     - name: Sonar Analysis
       run: ./gradlew sonarqube 
+    - name: Unit Test Case
+      run: ./gradlew test

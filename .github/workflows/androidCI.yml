@@ -3,16 +3,15 @@ on:
   workflow_dispatch
 
 jobs:
-  echo-job:
+  Code-checkout:
     runs-on: self-hosted
-
     steps:
-    - name: Run Echo Command
-      run: echo "Hello, GitHub Actions!"
-      
     - name: Checkout code
       uses: actions/checkout@v2
-      
+
+  Lint-Report:
+    runs-on: self-hosted
+    steps:
     - name: Lint Report
       run: ./gradlew lintDebug
     - name: Upload html test report
@@ -21,10 +20,16 @@ jobs:
         name: index.html
         path: app/build/reports/lint-results-debug.html
         if-no-files-found: warn
-
-      
+    
+  Sonar-Analysis:
+    runs-on: self-hosted
+    steps:      
     - name: Sonar Analysis
-      run: ./gradlew sonarqube 
+      run: ./gradlew sonarqube
+
+  Unit-Test: 
+   runs-on: self-hosted
+   steps:    
     - name: Unit Test Case
       run: ./gradlew test
     - name: Upload unit test report

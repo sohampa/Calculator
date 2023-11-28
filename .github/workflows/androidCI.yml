@@ -43,14 +43,14 @@ jobs:
   #       if-no-files-found: warn  
 
   Build: 
-   # needs: Unit-Test
+   needs: Code-checkout
    runs-on: self-hosted
    steps:    
     - name: Build
       run: ./gradlew assembleDebug
 
   Deploy-apk: 
-   # needs: Build
+   needs: Build
    runs-on: self-hosted
    steps:
     - name: Set up Node.js

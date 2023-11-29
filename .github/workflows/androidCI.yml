@@ -73,19 +73,19 @@ jobs:
       with: 
         payload: |
           {
-          "text": "GitHub Action",
-          "blocks": [
-            {
-              "type": "section",
-              "text": {
-                "type": "mrkdwn",
-                "text": "GitHub Action build result:"
-              }
+        "text": "GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}",
+        "blocks": [
+          {
+            "type": "section",
+            "text": {
+              "type": "mrkdwn",
+              "text": "GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}"
             }
-          ]
           }
+        ]
+      }
       env:
-        SLACK_WEBHOOK_URL: https://hooks.slack.com/services/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
+        SLACK_WEBHOOK_URL: https://hooks.slack.com/services/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
         SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
 
         

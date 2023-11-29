@@ -69,7 +69,7 @@ jobs:
     runs-on: self-hosted
     steps:
     - name: Send Slack Notification
-      uses: pullreminders/slack-send-message@v1
+      uses: slackapi/slack-github-action@v1.24.0
       with:
           slack-bot-token: "7Fs30wcQtNb0ZLDMKGHs4119"
           channel-id: "C0618ATJWCB"

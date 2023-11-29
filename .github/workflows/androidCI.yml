@@ -71,7 +71,7 @@ jobs:
     - name: Send Slack Notification
       uses: slackapi/slack-github-action@v1.24.0
       with:
-          slack-bot-token: "7Fs30wcQtNb0ZLDMKGHs4119"
+          slack_webhook_url: "https://hooks.slack.com/services/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"
           channel-id: "C0618ATJWCB"
           message: "GitHub Action: The workflow has been triggered."
     

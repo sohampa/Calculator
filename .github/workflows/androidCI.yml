@@ -74,7 +74,7 @@ jobs:
           status: ${{job.status}}
           steps:  ${{toJson(steps)}}
           channel: '#android-app-notification'
-          if: always()
+          # if: always()
         env:
             SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}      
         

@@ -67,13 +67,26 @@ jobs:
   Slack-Notification:
     needs: Code-checkout
     runs-on: self-hosted
-    steps: 
-       - name: Slack Notification
-       # - uses: rtCamp/action-slack-notify@v2
-         run: |
-           curl -X POST -H 'Content-type: application/json' --data "{
-           \"text\": \"${{ job.status }}\"
-            }" https://hooks.slack.com/services/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
+    steps:
+    - name: Send Slack Notification
+      uses: pullreminders/slack-send-message@v1
+      with:
+          slack-bot-token: "7Fs30wcQtNb0ZLDMKGHs4119"
+          channel-id: "C0618ATJWCB"
+          message: "GitHub Action: The workflow has been triggered."
+    
+    
+    
+    
+    
+    
+    # steps: 
+    #    - name: Slack Notification
+    #    # - uses: rtCamp/action-slack-notify@v2
+    #      run: |
+    #        curl -X POST -H 'Content-type: application/json' --data "{
+    #        \"text\": \"${{ job.status }}\"
+    #         }" https://hooks.slack.com/services/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
 
          
            

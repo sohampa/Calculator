@@ -74,7 +74,7 @@ jobs:
           channel-id: "C0618ATJWCB"
           slack-message: "GitHub build result: ${{ job.status }}"
       env:
-        SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+        slack-bot-token: ${{ secrets.SLACK_BOT_TOKEN }}
         
     
     

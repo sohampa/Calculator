@@ -69,12 +69,19 @@ jobs:
     runs-on: self-hosted
     steps: 
        - name: Slack Notification
-       - uses: rtCamp/action-slack-notify@v2
-         env: 
-          SLACK_CHANNEL: android-app-notification
-          SLACK_COLOR: ${{ job.status }} # or a specific color like 'good' or '#ff00ff'
-          SLACK_ICON: https://github.com/rtCamp.png?size=48
-          SLACK_MESSAGE: ${{ job.status }}
-          SLACK_TITLE: Post Title
-          SLACK_USERNAME: Cybage-SohamDemo
-          SLACK_WEBHOOK: https://hooks.slack.com/services/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
+       # - uses: rtCamp/action-slack-notify@v2
+         run: |
+           curl -X POST -H 'Content-type: application/json' --data "{
+           \"text\": \"${{ job.status }}\"
+            }" https://hooks.slack.com/services/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
+
+         
+           
+         # env: 
+         #  SLACK_CHANNEL: android-app-notification
+         #  SLACK_COLOR: ${{ job.status }} # or a specific color like 'good' or '#ff00ff'
+         #  SLACK_ICON: https://github.com/rtCamp.png?size=48
+         #  SLACK_MESSAGE: ${{ job.status }}
+         #  SLACK_TITLE: Post Title
+         #  SLACK_USERNAME: Cybage-SohamDemo
+         #  SLACK_WEBHOOK: https://hooks.slack.com/services/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

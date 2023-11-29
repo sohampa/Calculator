@@ -9,41 +9,41 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-  # Lint-Report:
-  #   needs: Code-checkout
-  #   runs-on: self-hosted
-  #   steps:
-  #   - name: Lint Report
-  #     run: ./gradlew lintDebug
-  #   - name: Upload html test report
-  #     uses: actions/upload-artifact@v3
-  #     with:
-  #       name: index.html
-  #       path: app/build/reports/lint-results-debug.html
-  #       if-no-files-found: warn
+  Lint-Report:
+    needs: Code-checkout
+    runs-on: self-hosted
+    steps:
+    - name: Lint Report
+      run: ./gradlew lintDebug
+    - name: Upload html test report
+      uses: actions/upload-artifact@v3
+      with:
+        name: index.html
+        path: app/build/reports/lint-results-debug.html
+        if-no-files-found: warn
     
-  # Sonar-Analysis:
-  #   needs: Lint-Report
-  #   runs-on: self-hosted
-  #   steps:      
-  #   - name: Sonar Analysis
-  #     run: ./gradlew sonarqube
+  Sonar-Analysis:
+    needs: Lint-Report
+    runs-on: self-hosted
+    steps:      
+    - name: Sonar Analysis
+      run: ./gradlew sonarqube
 
-  # Unit-Test: 
-  #  needs: Sonar-Analysis
-  #  runs-on: self-hosted
-  #  steps:    
-  #   - name: Unit Test Case
-  #     run: ./gradlew test
-  #   - name: Upload unit test report
-  #     uses: actions/upload-artifact@v3
-  #     with:
-  #       name: test-report.html
-  #       path: app/build/reports/tests/testDebugUnitTest/index.html
-  #       if-no-files-found: warn  
+  Unit-Test: 
+   needs: Sonar-Analysis
+   runs-on: self-hosted
+   steps:    
+    - name: Unit Test Case
+      run: ./gradlew test
+    - name: Upload unit test report
+      uses: actions/upload-artifact@v3
+      with:
+        name: test-report.html
+        path: app/build/reports/tests/testDebugUnitTest/index.html
+        if-no-files-found: warn  
 
   Build: 
-   needs: Code-checkout
+   needs: Unit-Test
    runs-on: self-hosted
    steps:    
     - name: Build

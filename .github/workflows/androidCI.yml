@@ -2,6 +2,9 @@ name: Android CI
 on: 
   workflow_dispatch
 
+env: 
+  SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+  
 jobs:
   Code-checkout:
     runs-on: self-hosted

@@ -70,11 +70,24 @@ jobs:
     steps:
     - name: Send Slack Notification
       uses: slackapi/slack-github-action@v1.24.0
-      with:
-          channel-id: "C0618ATJWCB"
-          slack-message: "GitHub build result: ${{ job.status }}"
+      with: 
+        payload: |
+          {
+          "text": "GitHub Action",
+          "blocks": [
+            {
+              "type": "section",
+              "text": {
+                "type": "mrkdwn",
+                "text": "GitHub Action build result:"
+              }
+            }
+          ]
+          }
       env:
-        slack-bot-token: ${{ secrets.SLACK_BOT_TOKEN }}
+        SLACK_WEBHOOK_URL: https://hooks.slack.com/services/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
+        SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+
         
     
     

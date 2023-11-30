@@ -12,61 +12,62 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-  # Lint-Report:
-  #   needs: Code-checkout
-  #   runs-on: self-hosted
-  #   steps:
-  #   - name: Lint Report
-  #     run: ./gradlew lintDebug
-  #   - name: Upload html test report
-  #     uses: actions/upload-artifact@v3
-  #     with:
-  #       name: index.html
-  #       path: app/build/reports/lint-results-debug.html
-  #       if-no-files-found: warn
+  Lint-Report:
+    needs: Code-checkout
+    runs-on: self-hosted
+    steps:
+    - name: Lint Report
+      run: ./gradlew lintDebug
+    - name: Upload html test report
+      uses: actions/upload-artifact@v3
+      with:
+        name: index.html
+        path: app/build/reports/lint-results-debug.html
+        if-no-files-found: warn
     
-  # Sonar-Analysis:
-  #   needs: Lint-Report
-  #   runs-on: self-hosted
-  #   steps:      
-  #   - name: Sonar Analysis
-  #     run: ./gradlew sonarqube
+  Sonar-Analysis:
+    needs: Lint-Report
+    runs-on: self-hosted
+    steps:      
+    - name: Sonar Analysis
+      run: ./gradlew sonarqube
 
-  # Unit-Test: 
-  #  needs: Sonar-Analysis
-  #  runs-on: self-hosted
-  #  steps:    
-  #   - name: Unit Test Case
-  #     run: ./gradlew test
-  #   - name: Upload unit test report
-  #     uses: actions/upload-artifact@v3
-  #     with:
-  #       name: test-report.html
-  #       path: app/build/reports/tests/testDebugUnitTest/index.html
-  #       if-no-files-found: warn  
+  Unit-Test: 
+   needs: Sonar-Analysis
+   runs-on: self-hosted
+   steps:    
+    - name: Unit Test Case
+      run: ./gradlew test
+    - name: Upload unit test report
+      uses: actions/upload-artifact@v3
+      with:
+        name: test-report.html
+        path: app/build/reports/tests/testDebugUnitTest/index.html
+        if-no-files-found: warn  
 
-  # Build: 
-  #  needs: Unit-Test
-  #  runs-on: self-hosted
-  #  steps:    
-  #   - name: Build
-  #     run: ./gradlew assembleDebug
+  Build: 
+   needs: Unit-Test
+   runs-on: self-hosted
+   steps:    
+    - name: Build
+      run: ./gradlew assembleDebug
 
-  # Deploy-apk: 
-  #  needs: Build
-  #  runs-on: self-hosted
-  #  steps:
-  #   - name: Set up Node.js
-  #     uses: actions/setup-node@v3
-  #     with:
-  #       node-version: '16'
+  Deploy-apk: 
+   needs: Build
+   runs-on: self-hosted
+   steps:
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'
 
-  #   - name: Install App Center CLI
-  #     run: |
-  #       npm install -g appcenter-cli
+    - name: Install App Center CLI
+      run: |
+        npm install -g appcenter-cli
 
-  #   - name: Upload to App Center
-  #     run: appcenter distribute release --disable-telemetry --app sohampa-cybage.com/Demo_Android_App -f ./app/build/outputs/apk/debug/app-debug.apk --token cff85da442d6be30154ab06a14048f2d9e726614 -g "test"
+    - name: Upload to App Center
+      run: appcenter distribute release --disable-telemetry --app sohampa-cybage.com/Demo_Android_App -f ./app/build/outputs/apk/debug/app-debug.apk --token cff85da442d6be30154ab06a14048f2d9e726614 -g "test"
+  
   Slack-Notification:
     needs: Code-checkout
     runs-on: self-hosted

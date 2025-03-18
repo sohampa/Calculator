@@ -1,5 +1,22 @@
 workflows:
-  hello-world:
-    name: Hello world workflow
+  android-apk:
+    name: Android APK Build
+    max_build_duration: 120
+    environment:
+      android: latest
+      java: 17
     scripts:
-        - echo "Hello World!"
+      - name: Clean project
+        script: |
+          cd android
+          ./gradlew clean
+      - name: Build APK
+        script: |
+          cd android
+          ./gradlew assembleRelease
+    artifacts:
+      - android/app/build/outputs/apk/release/app-release.apk
+    # publishing:
+    #   email:
+    #     recipients:
+    #       - "your-email@example.com"

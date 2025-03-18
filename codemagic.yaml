@@ -16,7 +16,7 @@ workflows:
       - name: Debug List generated files
         script: |
           echo "Checking APK directory:"
-          ls -l app/
+          ls -l app/build/
           # ls -l build/
           # ls -l app/release/
     artifacts:

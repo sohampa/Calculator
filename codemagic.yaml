@@ -8,6 +8,7 @@ workflows:
     scripts:
       - name: Clean project
         script: |
+          chmod +x gradlew
           ./gradlew clean
       - name: Build APK
         script: |

@@ -16,6 +16,6 @@ workflows:
       - name: Debug List generated files
         script: |
           echo "Checking APK directory:"
-          ls -R android/app/build/outputs/apk/release/
+          ls -l
     artifacts:
       - android/app/build/outputs/apk/release/app-release.apk

@@ -13,7 +13,7 @@ workflows:
       - name: Build APK
         script: |
           ./gradlew assembleRelease
-      - name: Debug: List generated files
+      - name: Debug List generated files
         script: |
           echo "Checking APK directory:"
           ls -R android/app/build/outputs/apk/release/

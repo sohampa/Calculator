@@ -3,8 +3,8 @@ workflows:
     name: Android APK Build
     max_build_duration: 120
     environment:
-      android: latest
-      java: 17
+      vars:
+        JAVA_HOME: /usr/lib/jvm/java-17-openjdk-amd64  # Set Java version
     scripts:
       - name: Clean project
         script: |
@@ -16,7 +16,3 @@ workflows:
           ./gradlew assembleRelease
     artifacts:
       - android/app/build/outputs/apk/release/app-release.apk
-    # publishing:
-    #   email:
-    #     recipients:
-    #       - "your-email@example.com"
